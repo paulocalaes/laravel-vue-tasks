@@ -13,4 +13,21 @@
 
 Route::get('/', function () {
     return view('welcome');
+})->middleware('auth');
+
+Route::get('/news', function () {
+    return view('news');
+})->middleware('auth');
+
+Route::prefix('api')->group(function() {
+    Route::resource('tasks', 'TaskController');
 });
+
+Route::prefix('api')->group(function() {
+    Route::resource('news', 'NewsController');
+});
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
